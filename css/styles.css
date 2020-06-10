@@ -1,0 +1,145 @@
+@charset "UTF-8";
+/* CSS Document */
+:root {
+  --theme: #306BB7;
+  background-image: url(/img/table-bg.jpg);
+  background-size: cover;  
+}
+/* the container */
+figure {
+  width: 200px;
+  height: 300px;
+  position: relative;
+  margin: auto;
+  display: flex;
+}
+
+/* all the cards */
+.card {
+  height: 300px;
+  width: 200px;
+  position: absolute;
+  top: 50%;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  perspective: 600px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
+}
+
+
+.back,
+.face {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right:0;
+  border-radius: 10px;
+}
+
+/* backs of the cards */
+.back {
+  border: 10px solid white;
+  background-image:
+  conic-gradient(from 45deg,
+      #fff 0.25turn, 
+      var(--theme) 0.25turn 0.5turn, 
+      #fff 0.5turn 0.75turn, 
+      var(--theme) 0.75turn);
+  background-position: .75em 2em;
+  background-size: 2em 2em;
+  background-color: white;
+  z-index: 100;
+  transform: rotateX(0deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  z-index: 100;
+}
+/* card faces */
+.face {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  z-index: 50;
+  background-color: white;
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
+}
+.face::before {
+  content: attr(data-value);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.face::after {
+  content: attr(data-value);
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+
+
+}
+/* red cards */
+[data-type="H" i],
+[data-type="D" i] {
+  color: #fe0e00;
+}
+/* black cards */
+[data-type="C" i],
+[data-type="S" i] {
+  color: black;
+}
+/* non-hovered*/
+.card:first-of-type {
+  transform: rotate(-20deg);
+}
+.card:nth-of-type(2) {
+  transform: rotate(25deg) translate(25px) ;
+}
+.card:last-of-type {
+  transform: rotate(0deg);
+}
+
+/* when hovered */
+.card:first-of-type:hover {
+  transform: translateX(-200px) rotate(10deg);
+}
+.card:nth-of-type(2):hover {
+  transform: translateX(200px) rotate(10deg);
+}
+.card:last-of-type:hover {
+  transform: translateY(200px) rotate(5deg);
+}
+
+/* hovered card */
+.card:hover {
+  transition: 1s ease;
+}
+
+.card .face {
+  transform: rotateX(0deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  transition: all .4s ease-in-out;
+}
+
+.card:hover .back {
+  transform: rotateY(180deg);
+} 
+
+.card:hover .face {
+  transform: rotateY(0deg);
+} 
+
+.card .face {
+  transform: rotateY(-180deg);
+  transform-style: preserve-3d;
+}
+
+
+
+
